@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrontCraft - Calm Water Cinematic</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;
+  font-family:"Poppins",sans-serif;color:#dff9ff;background:#00121a;position:relative;
+}
+
+/* الخلفية المائية */
+.water-bg{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  background:linear-gradient(to bottom,#00121a 0%,#000814 100%);
+  filter: blur(1px);
+}
+.wave-layer{
+  position:absolute;width:200%;height:200%;border-radius:35%;
+  background: rgba(0,150,200,0.12);
+  animation: waveMove 14s linear infinite;
+  opacity:0.6;
+}
+.wave-layer.layer2{
+  animation-duration:20s;
+  background: rgba(0,180,255,0.1);
+  opacity:0.5;
+}
+
+/* حركة الموج */
+@keyframes waveMove{
+  0%{transform:translateX(0) rotate(0deg);}
+  100%{transform:translateX(-50%) rotate(360deg);}
+}
+
+/* فقاعات التحميل */
+.bubbles{
+  position:absolute;width:100%;height:100%;z-index:1;overflow:hidden;
+}
+.bubbles span{
+  position:absolute;bottom:-50px;background:rgba(180,220,255,0.25);border-radius:50%;
+  animation:bubbleRise 14s linear infinite;box-shadow:0 0 10px rgba(180,220,255,0.3);
+}
+@keyframes bubbleRise{
+  0%{transform:translateY(0) scale(1);opacity:0.7;}
+  50%{opacity:1;}
+  100%{transform:translateY(-1100px) scale(0.6);opacity:0;}
+}
+
+/* شريط التحميل الموجي */
+.progress-bar{
+  position:absolute;bottom:40px;width:300px;height:4px;border-radius:10px;overflow:hidden;
+  background: rgba(255,255,255,0.1);z-index:2;
+}
+.progress{
+  height:100%;width:0%;background: linear-gradient(90deg,#00b4d8,#48cae4,#00b4d8);
+  border-radius:10px;transition:width 0.5s ease;box-shadow:0 0 15px #48cae4;
+}
+
+/* الدائرة المتوهجة */
+.loader{
+  position:relative;width:220px;height:220px;border-radius:50%;background: rgba(255,255,255,0.05);
+  box-shadow: inset 0 0 30px rgba(0,140,255,0.1), 0 0 40px rgba(0,200,255,0.1); display:flex;justify-content:center;align-items:center; z-index:2; overflow:hidden;
+}
+.loader.glow{
+  box-shadow: 0 0 50px #48cae4, 0 0 100px #00b4d8;
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 20px #48cae4,0 0 40px #00b4d8;}
+  50%{box-shadow:0 0 60px #48cae4,0 0 120px #00b4d8;}
+  100%{box-shadow:0 0 20px #48cae4,0 0 40px #00b4d8;}
+}
+
+/* نص التحميل */
+.percent{
+  position:absolute;font-size:2.2em;font-weight:500;color:#c8f4ff;
+  text-shadow:0 0 15px #8fd5ff,0 0 30px rgba(143,213,255,0.5);z-index:3;letter-spacing:1px;
+}
+
+/* فقاعات صغيرة عشوائية */
+.particles{position:absolute;width:100%;height:100%;z-index:1;}
+.particle{position:absolute;width:2px;height:2px;background:rgba(255,255,255,0.5);border-radius:50%;animation: float 15s infinite linear;}
+@keyframes float{
+  0%{transform:translateY(100vh) translateX(0); opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{transform:translateY(-100px) translateX(20px); opacity:0;}
+}
+
+/* نص القناة */
+.content{text-align:center;z-index:3;display:flex;flex-direction:column;align-items:center;}
+h1{
+  font-size:3.5em;letter-spacing:3px;color:#aee3ff;
+  text-shadow:0 0 25px #00b4d8,0 0 50px #48cae4,0 0 90px rgba(72,202,228,0.5);
+  margin-bottom:15px;opacity:0;transform:translateY(20px);
+  animation:fadeInUp 1.5s ease forwards 3s;font-weight:600;
+}
+p{
+  font-size:1.3em;color:#dffbff;opacity:0;transform:translateY(20px);
+  text-shadow:0 0 20px #90e0ef;animation:fadeInUp 1.5s ease forwards 4.5s;font-weight:300;letter-spacing:1px;
+}
+.tagline{
+  margin-top:10px;font-size:1em;color:#a0d8ff;opacity:0;animation:fadeIn 2s ease forwards 5.5s;
+}
+.continue-btn{
+  margin-top:40px;padding:12px 30px;background:rgba(0,180,216,0.2);
+  color:#aee3ff;border:1px solid rgba(0,180,216,0.5);border-radius:30px;
+  font-family:"Poppins",sans-serif;font-size:1em;cursor:pointer;opacity:0;transform:translateY(20px);
+  animation:fadeInUp 1s ease forwards 6s;transition:all 0.3s ease;text-shadow:0 0 10px rgba(0,180,216,0.5);letter-spacing:1px;
+}
+.continue-btn:hover{
+  background:rgba(0,180,216,0.3);box-shadow:0 0 25px rgba(0,180,216,0.5);transform:translateY(-2px);
+}
+
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{to{opacity:1;}}
+
+</style>
+</head>
+<body>
+
+<div class="water-bg">
+  <div class="wave-layer"></div>
+  <div class="wave-layer layer2"></div>
+</div>
+
+<div class="bubbles">
+  <span style="left:10%; width:20px; height:20px; animation-delay:0s;"></span>
+  <span style="left:25%; width:30px; height:30px; animation-delay:3s;"></span>
+  <span style="left:40%; width:15px; height:15px; animation-delay:1s;"></span>
+  <span style="left:55%; width:25px; height:25px; animation-delay:2s;"></span>
+  <span style="left:70%; width:20px; height:20px; animation-delay:4s;"></span>
+  <span style="left:85%; width:35px; height:35px; animation-delay:5s;"></span>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<div class="loader glow" id="loader">
+  <div class="percent" id="percent">0%</div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress" id="progress"></div>
+</div>
+
+<div class="content">
+  <h1>Final Touch </h1>
+  <p>Football club (Join Us)</p>
+  <div class="tagline">For Best PLayers</div>
+  <button class="continue-btn" id="continueBtn">Continue</button>
+</div>
+
+<audio id="bubbleAudio" loop>
+  <source src="https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-31966/zapsplat_nature_bubbles_rising_up_underwater_002_40158.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const particlesContainer = document.getElementById('particles');
+  for(let i=0;i<70;i++){
+    const particle=document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left=Math.random()*100+'%';
+    particle.style.animationDelay=Math.random()*15+'s';
+    particle.style.animationDuration=(15+Math.random()*15)+'s';
+    particlesContainer.appendChild(particle);
+  }
+  
+  let percent=document.getElementById("percent");
+  let progress=document.getElementById("progress");
+  let counter=0;
+  
+  document.body.addEventListener('click',function(){
+    const audio=document.getElementById('bubbleAudio');
+    audio.volume=0.3; 
+    audio.play().catch(e=>console.log("Audio play failed:",e));
+  },{once:true});
+  
+  let loading=setInterval(()=>{
+    if(counter>=100){
+      clearInterval(loading);
+      document.getElementById('loader').classList.add("flash");
+  
+      // تشغيل الصوت إذا لم يُشغل
+      const audio=document.getElementById('bubbleAudio');
+      audio.volume=0.3; 
+      audio.play().catch(e=>console.log("Audio play failed:",e));
+  
+      // بعد ثانيتين تحويل للصفحة index.html
+      setTimeout(()=>{
+        window.location.href = "index.html";
+      }, 2000);
+  
+    }else{
+      counter++;
+      percent.textContent=counter+"%";
+      progress.style.width=counter+"%";
+      if(counter<30){percent.style.color="#8fd5ff";}
+      else if(counter<70){percent.style.color="#48cae4";}
+      else{percent.style.color="#00b4d8";}
+    }
+  },120);
+  
+  // الزر يبقى إضافي بس مش ضروري للتحويل
+  document.getElementById('continueBtn').addEventListener('click',function(){
+    window.location.href = "index.html";
+  });
+  </script>
+  
+</body>
+</html>
